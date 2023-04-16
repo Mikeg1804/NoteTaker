@@ -1,15 +1,18 @@
 const notes = require("express").Router();
+const db = require('../db/db.json');
 
-notes.get("/api/notes", (req, res) => {
+notes.get("/notes", (req, res) => {
   res.json();
   getNotes();
 });
 
-notes.post("/api/notes", (req, res) => {
+
+// the first param is the path or end point. second arg is controller that controlls what happens when get to endpoint
+notes.post("/notes", (req, res) => {
   // Log that a POST request was received
   console.info(`${req.method} request received to add a note`);
-
-  const { noteTitle, noteText } = req.body;
+    console.log(req.body)
+  const {noteTitle, noteText } = req.body;
 
   if (noteTitle && noteText) {
     // Variable for the object we will save
