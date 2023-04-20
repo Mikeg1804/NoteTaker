@@ -16,13 +16,13 @@ notes.get("/notes", (req, res) => {
 
 // DELETE Route for a specific note
 // :note_id is the param for the specific note to be deleted.
-notes.delete('/notes/:note_id', (req, res) => {
-  const noteId = req.params.note_id;
+notes.delete('/notes/:id', (req, res) => {
+  const noteId = req.params.id;
+  console.log(noteId)
   readFromFile('./db/db.json')
     .then((data) => JSON.parse(data))
     .then((json) => {
-      // Make a new array of all tips except the one with the ID provided in the URL
-      const result = json.filter((note) => note.note_id !== noteId);
+      const result = json.filter((note) => note.id !== noteId);
 
       // Save that array to the filesystem
       writeToFile('./db/db.json', result);
@@ -45,7 +45,7 @@ notes.post("/notes", (req, res) => {
     const newNote = {
       title,
       text,
-      tip_id: uuidv4(),
+      id: uuidv4(),
     };
 
     readAndAppend(newNote, './db/db.json');
