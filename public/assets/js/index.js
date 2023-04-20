@@ -26,6 +26,7 @@ const hide = (elem) => {
 let activeNote = {};
 
 const getNotes = () =>
+// should this be /api/NotesRoute?
   fetch('/api/notes', {
     method: 'GET',
     headers: {
